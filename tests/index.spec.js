@@ -1,4 +1,5 @@
-'use strict';
+ /*
+ 'use strict';
 
 const chai = require('chai');
 const { expect } = require('chai');
@@ -7,9 +8,9 @@ chai.use(chaiAsPromised);
 
 const nodemailer = require('nodemailer');
 const { stub } = require('sinon');
-const { welcomeEmail } = require('../src');
+const { appointmentNotification} = require('../src');
 
-describe('welcome-email-function: unit tests', () => {
+describe('appointment notification unit tests', () => {
   let createTransportStub;
 
   before(() => {
@@ -26,11 +27,11 @@ describe('welcome-email-function: unit tests', () => {
     };
     const context = {};
 
-    expect(welcomeEmail(data, context)).to.be.fulfilled.then(() => {
+    expect(appointmentNotification(data, context)).to.be.fulfilled.then(() => {
       expect(createTransportStub.called).to.be.true;
 
       // Send a second mail to ensure the global is re-used
-      expect(welcomeEmail(data, context)).to.be.fulfilled.then(() => {
+      expect(appointmentNotification(data, context)).to.be.fulfilled.then(() => {
         expect(createTransportStub.callCount).to.equal(1);
         done();
       });

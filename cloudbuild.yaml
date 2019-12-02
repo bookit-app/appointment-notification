@@ -1,35 +1,49 @@
 steps:
-- name: "node:10.16.3"
-  entrypoint: npm
-  args: ['install']
+  - name: "node:10.16.3"
+    entrypoint: npm
+    args: ["install"]
 
-- name: "node:10.16.3"
-  entrypoint: npm
-  args: ['run', 'test']
+  - name: "node:10.16.3"
+    entrypoint: npm
+    args: ["run", "test"]
 
-- name: "node:10.16.3"
-  entrypoint: npm
-  args: ['run', 'lint']
+  - name: "node:10.16.3"
+    entrypoint: npm
+    args: ["run", "lint"]
 
-- name: gcr.io/cloud-builders/gcloud
-  args:
-  - kms
-  - decrypt
-  - --ciphertext-file=gcloud-env.yaml.enc
-  - --plaintext-file=gcloud-env.yaml
-  - --location=global
-  - --keyring=build-ring
-  - --key=env-enc-key
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - kms
+      - decrypt
+      - --ciphertext-file=gcloud-env.yaml.enc
+      - --plaintext-file=gcloud-env.yaml
+      - --location=global
+      - --keyring=build-ring
+      - --key=env-enc-key
 
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - functions
-  - deploy
-  - welcome-email
-  - --source=.
-  - '--trigger-event=providers/firebase.auth/eventTypes/user.create'
-  - '--trigger-resource=sweng-581-capstone'
-  - --runtime=nodejs10
-  - --env-vars-file=gcloud-env.yaml
-  - --region=us-central1
-  - --entry-point=welcomeEmail
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - functions
+      - deploy
+      - appointment-notification
+      - --source=.
+      - "--trigger-event=providers/cloud.firestore/eventTypes/document.create"
+      - "--trigger-resource=projects/sweng-581-capstone/databases/(default)/documents/appointments/{appointmentId}"
+      - --runtime=nodejs10
+      - --region=us-central1
+      - --env-vars-file=gcloud-env.yaml
+      - --entry-point=publishNotification
+
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - functions
+      - deploy
+      - appointment-notification
+      - --source=.
+      - "--trigger-event=providers/cloud.firestore/eventTypes/document.update"
+      - "--trigger-resource=projects/sweng-581-capstone/databases/(default)/documents/appointments/{time}"
+      - "--trigger-resource=projects/sweng-581-capstone/databases/(default)/documents/appointments/{date}"
+      - --runtime=nodejs10
+      - --region=us-central1
+      - --env-vars-file=gcloud-env.yaml
+      - --entry-point=publishNotification
