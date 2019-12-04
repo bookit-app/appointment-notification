@@ -4,6 +4,14 @@
 
 This function is responsible to generate a create appointment or updated appointment email for the user notifying them of the appointment along with name of the salon, staff member, time, and date.
 
+## Update Appointment Email
+
+This function is respsonsible for checking old data set for an appointment and comparing it to the current/new appointment. If the two are not matched an email detailing the differences whether it be the business name, staff member, time, or date will be emailed to the client and staff member providing them with the new appointment details.
+
+## Create Appointment Email
+
+A simple function to generate an appointment created email to the client and staff member once a new appointment is detected in firestore. 
+
 ## Requirements
 
 ### KMS Keys
@@ -20,6 +28,8 @@ The cloud function is dependent on information for the sender email account. The
 email-account: <EMAIL_ADDRESS>
 email-password: <PASSOWRD>
 ```
+
+
 
 
 ## Deploy
