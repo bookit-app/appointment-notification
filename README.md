@@ -1,8 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/bookit-app/welcome-email-function/badge.svg?branch=master)](https://coveralls.io/github/bookit-app/welcome-email-function?branch=master)
 
-# Cloud Function: welcome-email-function 
+# Cloud Function: appointment-notification
 
-This function is responsible to generate a welcome email for the new user thanking them and providing information on where they can get more information if necessary.
+This function is responsible to generate a create appointment or updated appointment email for the user notifying them of the appointment along with name of the salon, staff member, time, and date.
 
 ## Requirements
 
