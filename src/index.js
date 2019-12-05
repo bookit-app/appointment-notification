@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 exports.updateAppointment = functions.firestore
     .document('appointments/{appointmentId}/time')('appointments/{appointmentId}/date')
     .onUpdate((change, context) => {
@@ -96,7 +96,8 @@ usersRef.get()
       });
     } 
 });
-
+*/
+/*
 
 exports.sendEmail = functions.firestore.document('appointments/{appointmentId}')
   .onUpdate((change, context) => {  
@@ -127,6 +128,8 @@ exports.sendEmail = functions.firestore.document('appointments/{appointmentId}')
     } 
   });
 
+
+  */
   if (data.oldValue && Object.keys(data.appointment).time.stringify != (data.appointment.value).time.stringify) {
     console.log(`\nOld value:`);
     console.log(JSON.stringify(data.oldValue, null, 2));
