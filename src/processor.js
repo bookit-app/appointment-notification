@@ -7,11 +7,10 @@ module.exports = async (
   profileClient,
   mailTransport
 ) => {
-  const { params } = context;
   const APP_NAME = 'Book It!';
 
   const appointment = await appointmentRepository.findByAppointmentId(
-    params.appointmentId
+    context.params.appointmentId
   );
 
   const clientProfile = await profileClient.queryProfile(appointment.clientId);
