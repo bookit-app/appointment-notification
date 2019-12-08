@@ -3,14 +3,6 @@ steps:
     entrypoint: npm
     args: ["install"]
 
-  - name: "node:10.16.3"
-    entrypoint: npm
-    args: ["run", "test"]
-
-  - name: "node:10.16.3"
-    entrypoint: npm
-    args: ["run", "lint"]
-
   - name: gcr.io/cloud-builders/gcloud
     args:
       - kms
@@ -30,6 +22,6 @@ steps:
       - "--trigger-event=providers/cloud.firestore/eventTypes/document.update"
       - "--trigger-resource=projects/bookit-app/databases/(default)/documents/appointments/{appointmentId}"
       - --runtime=nodejs10
-      - --region=us-central1
+      - --region=us-east1
       - --env-vars-file=gcloud-env.yaml
-      - --entry-point=publishNotification
+      - --entry-point=appointmentNotification

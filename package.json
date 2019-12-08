@@ -1,6 +1,6 @@
 {
-  "name": "welcome-email-function",
-  "description": "Generate Welcome Email for new accounts",
+  "name": "appointment-notification",
+  "description": "Generate Notification Emails when appointments change",
   "main": "src/index.js",
   "scripts": {
     "start": "functions-framework --source src/index.js --target=appointmentNotification",
@@ -29,11 +29,14 @@
     "instrument": true
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   },
   "dependencies": {
     "@google-cloud/firestore": "^2.6.1",
     "@google-cloud/functions-framework": "^1.3.2",
+    "lodash": "^4.17.15",
     "nodemailer": "^6.3.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.5"
