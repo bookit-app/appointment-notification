@@ -14,10 +14,6 @@ module.exports = async (
     params.appointmentId
   );
 
-  console.log(
-    `Appointment with ID ${appointment.appointmentId} for client ${appointment.clientId} loaded`
-  );
-
   const clientProfile = await profileClient.queryProfile(appointment.clientId);
 
   const mailOptions = {

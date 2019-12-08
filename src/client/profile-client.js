@@ -10,7 +10,6 @@ class ProfileClient {
   async queryProfile(profileId) {
     const token = await this.tokenClient.getToken(this.host);
 
-    console.log('Query profile');
     return this.client.get({
       url: `${this.host}/admin/profile/${profileId}`,
       auth: {

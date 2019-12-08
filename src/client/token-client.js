@@ -22,7 +22,6 @@ class TokenClient {
       }
     };
 
-    console.log('Query token');
     return await this.client(tokenRequestOptions);
   }
 }
