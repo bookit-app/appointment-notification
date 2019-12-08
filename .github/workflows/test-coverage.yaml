@@ -14,12 +14,9 @@ jobs:
         with:
           version: 10.x
 
-      - name: Install
-        run: ./install.sh
-        shell: bash
-
-      - name: test
+      - name: npm install, test
         run: |
+          npm install
           npm test
 
       - name: Coveralls
