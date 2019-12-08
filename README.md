@@ -1,25 +1,23 @@
-[![Coverage Status](https://coveralls.io/repos/github/bookit-app/welcome-email-function/badge.svg?branch=master)](https://coveralls.io/github/bookit-app/welcome-email-function?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/bookit-app/appointment-notification/badge.svg?branch=master)](https://coveralls.io/github/bookit-app/appointment-notification?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/71f873d01e9747c4ada06f2505d1a6ee)](https://www.codacy.com/gh/bookit-app/appointment-notification?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bookit-app/appointment-notification&amp;utm_campaign=Badge_Grade)
 
 # Cloud Function: appointment-notification
 
-This function is responsible to generate a create appointment or updated appointment email for the user notifying them of the appointment along with name of the salon, staff member, time, and date.
+This function is responsible to generate a updated appointment email for the user notifying them that there were changes to their appointment.
 
 ## Update Appointment Email
 
-This function is respsonsible for checking old data set for an appointment and comparing it to the current/new appointment. If the two are not matched an email detailing the differences whether it be the business name, staff member, time, or date will be emailed to the client and staff member providing them with the new appointment details.
+When firestore update triggers are fired this function will load the necessary information and generate an email notification.
 
+## Dependencies 
 
-## Requirements
+### User Profile
 
-### Dependencies 
+Function will retrieve the user's information such as their name and email and address in order to send the appointment-notification email addressed to them with their appointment details. 
 
-#### User Profile
+### Appointments
 
-Function will retrieeve the user's infromation such as their name and email and address in order to send the appointment-notification email addressed to them with their appointment details. 
-
-#### Appointments
-
-Function checks to see if there is an update to an already set appointment. If an update is dedected, an appointment-notifcation will be triggered signaling the function to send an email to the user. 
+Function checks to see if there is an update to an already set appointment. If an update is detected, an appointment-notification will be triggered signaling the function to send an email to the user. 
 
 ### KMS Keys
 
@@ -34,11 +32,8 @@ The cloud function is dependent on information for the sender email account. The
 ```yaml
 email-account: <EMAIL_ADDRESS>
 email-password: <PASSOWRD>
+profile-service-host: <URL FOR THE QUERY PROFILE SERVICE>
 ```
-
-
-
-
 
 ## Deploy
 

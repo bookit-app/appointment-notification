@@ -3,14 +3,6 @@ steps:
     entrypoint: npm
     args: ["install"]
 
-  - name: "node:10.16.3"
-    entrypoint: npm
-    args: ["run", "test"]
-
-  - name: "node:10.16.3"
-    entrypoint: npm
-    args: ["run", "lint"]
-
   - name: gcr.io/cloud-builders/gcloud
     args:
       - kms
@@ -18,8 +10,8 @@ steps:
       - --ciphertext-file=gcloud-env.yaml.enc
       - --plaintext-file=gcloud-env.yaml
       - --location=global
-      - --keyring=build-ring
-      - --key=env-enc-key
+      - --keyring=${_BUILD_RING}
+      - --key=${_KEY}
 
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -28,8 +20,8 @@ steps:
       - appointment-notification
       - --source=.
       - "--trigger-event=providers/cloud.firestore/eventTypes/document.update"
-      - "--trigger-resource=projects/bookit-app/databases/(default)/documents/appointments/{appointmentId}"
+      - "--trigger-resource=projects/$PROJECT_ID/databases/(default)/documents/appointments/{appointmentId}"
       - --runtime=nodejs10
-      - --region=us-central1
+      - --region=${_REGION}
       - --env-vars-file=gcloud-env.yaml
-      - --entry-point=publishNotification
+      - --entry-point=appointmentNotification
